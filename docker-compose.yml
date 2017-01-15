@@ -4,12 +4,12 @@ services:
     image: mtsmfm/rails-dev-box
     working_dir: /app
     environment:
-      BUNDLE_PATH: /tmp/vendor/bundle
+      BUNDLE_PATH: /app/vendor/bundle
     depends_on:
       - postgres
     volumes:
       - .:/app
-      - bundle:/tmp/vendor/bundle
+      - bundle:/app/vendor/bundle
   postgres:
     image: postgres:9.4
 volumes:
