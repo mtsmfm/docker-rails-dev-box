@@ -2,7 +2,7 @@
 
 set -ex
 
-curl https://github.com/mtsmfm/docker-rails-dev-box/raw/master/docker-compose.yml > docker-compose.yml
+curl -sL https://github.com/mtsmfm/docker-rails-dev-box/raw/master/docker-compose.yml > docker-compose.yml
 mkdir -p .git/info
 touch .git/info/exclude
 echo '/docker-compose.yml' >> .git/info/exclude
