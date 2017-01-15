@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+if [ -p /dev/stdin ]; then
+  cat - | docker exec -i rails_ruby_1 bundle exec rubocop -c .rubocop.yml "$@"
+else
+  docker exec -i rails_ruby_1 bundle exec rubocop -c .rubocop.yml "$@"
+fi

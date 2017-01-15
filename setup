@@ -2,12 +2,26 @@
 
 set -ex
 
-curl -sL https://github.com/mtsmfm/docker-rails-dev-box/raw/master/docker-compose.yml > docker-compose.yml
+download () {
+  curl -sL https://github.com/mtsmfm/docker-rails-dev-box/raw/master/$1 > $1
+}
+
+write_line () {
+  touch $1
+  if ! grep -xq "$2" $1; then
+    echo "$2" >> $1
+  fi
+}
+
 mkdir -p .git/info
-touch .git/info/exclude
-if ! grep -xq '/docker-compose.yml' .git/info/exclude > /dev/null; then
-  echo '/docker-compose.yml' >> .git/info/exclude
-fi
+
+download docker-compose.yml
+write_line .git/info/exclude '/docker-compose.yml'
+
+mkdir -p docker/bin
+download docker/bin/ruby
+download docker/bin/rubocop
+write_line .git/info/exclude '/docker'
 
 docker-compose down
 docker-compose up -d && sleep 15
