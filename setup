@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -ex
+
+curl https://github.com/mtsmfm/docker-rails-dev-box/raw/master/docker-compose.yml > docker-compose.yml
+mkdir -p .git/info
+touch .git/info/exclude
+echo '/docker-compose.yml' >> .git/info/exclude
+
+docker-compose down
+docker-compose up -d && sleep 5
+docker-compose exec postgres psql -c "create database activerecord_unittest;" -U postgres
+docker-compose exec postgres psql -c "create database activerecord_unittest2;" -U postgres
