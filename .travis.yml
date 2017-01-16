@@ -4,4 +4,5 @@ services:
   - docker
 
 script:
+  - docker info
   - docker run -it --rm -u node node:alpine touch /root/hoge
