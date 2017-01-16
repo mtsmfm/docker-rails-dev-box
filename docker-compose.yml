@@ -10,7 +10,9 @@ services:
     volumes:
       - .:/app
       - bundle:/app/vendor/bundle
+      - home:/home/app
   postgres:
     image: postgres:9.4
 volumes:
+  home:
   bundle:
