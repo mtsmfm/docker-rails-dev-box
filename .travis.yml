@@ -5,4 +5,6 @@ services:
 
 script:
   - docker info
+  - runc --version
+  - containerd --version
   - docker run -it --rm -u node node:alpine touch /root/hoge
