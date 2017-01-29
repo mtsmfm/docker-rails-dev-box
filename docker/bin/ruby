@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-if [ -p /dev/stdin ]; then
-  cat - | docker exec -i rails_ruby_1 ruby "$@"
-else
-  docker exec -i rails_ruby_1 ruby "$@"
-fi

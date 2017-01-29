@@ -6,11 +6,6 @@ download () {
   curl -sL https://github.com/mtsmfm/docker-rails-dev-box/raw/master/$1 > $1
 }
 
-download_bin () {
-  download $1
-  chmod +x $1
-}
-
 write_line () {
   touch $1
   if ! grep -xq "$2" $1; then
@@ -22,11 +17,6 @@ mkdir -p .git/info
 
 download docker-compose.yml
 write_line .git/info/exclude '/docker-compose.yml'
-
-mkdir -p docker/bin
-download_bin docker/bin/ruby
-download_bin docker/bin/rubocop
-write_line .git/info/exclude '/docker'
 
 docker-compose down
 docker-compose up -d && sleep 15
