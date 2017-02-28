@@ -15,4 +15,4 @@ ENV LANG=C.UTF-8 \
   LC_ALL=C.UTF-8 \
   BUNDLE_JOBS=4
 
-CMD ["sh", "-c", "trap : TERM INT; chown -R app . && sleep infinity & wait"]
+CMD ["sh", "-c", "trap : TERM INT; sleep infinity & wait"]
