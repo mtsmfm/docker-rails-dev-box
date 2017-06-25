@@ -16,9 +16,17 @@ write_line () {
 mkdir -p .git/info
 
 download docker-compose.yml
+download docker-sync.yml
+download Dockerfile
+
 write_line .git/info/exclude '/docker-compose.yml'
+write_line .git/info/exclude '/docker-sync.yml'
+write_line .git/info/exclude '/Dockerfile'
+
+docker-sync start
 
 docker-compose down
+docker-compose build
 docker-compose up -d && sleep 15
 docker-compose exec ruby bundle install
 docker-compose exec postgres psql -c "create database activerecord_unittest;" -U postgres

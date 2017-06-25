@@ -1,5 +1,11 @@
 # Docker rails dev box
 
+## Requirements
+
+- docker
+- docker-compose
+- docker-sync
+
 ## Usage
 
 ```

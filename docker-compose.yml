@@ -1,18 +1,17 @@
 version: '2'
 services:
   ruby:
-    image: mtsmfm/rails-dev-box
-    working_dir: /app
-    environment:
-      BUNDLE_PATH: /tmp/vendor/bundle
+    build: .
     depends_on:
       - postgres
     volumes:
-      - .:/app
-      - bundle:/tmp/vendor/bundle
+      - rails-rails-sync:/app
+      - bundle:/app/vendor/bundle
       - home:/home/app
   postgres:
-    image: postgres:9.4
+    image: postgres:9.4-alpine
 volumes:
   home:
   bundle:
+  rails-rails-sync:
+    external: true
