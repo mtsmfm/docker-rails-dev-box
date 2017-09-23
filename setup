@@ -2,8 +2,12 @@
 
 set -ex
 
+if -z "$BRANCH"; then
+  BRANCH=master
+fi
+
 download () {
-  curl -sL https://github.com/mtsmfm/docker-rails-dev-box/raw/master/$1 > $1
+  curl -sL https://github.com/mtsmfm/docker-rails-dev-box/raw/$BRANCH/$1 > $1
 }
 
 write_line () {
@@ -18,10 +22,16 @@ mkdir -p .git/info
 download docker-compose.yml
 download docker-sync.yml
 download Dockerfile
+download activerecord/test/config.yml
 
 write_line .git/info/exclude '/docker-compose.yml'
 write_line .git/info/exclude '/docker-sync.yml'
 write_line .git/info/exclude '/Dockerfile'
+
+docker volume create rails-rails-sync
+container=$(docker container create -v rails-rails-sync:/app_sync busybox)
+docker cp . $container:/app_sync
+docker container rm $container
 
 docker-sync start
 
