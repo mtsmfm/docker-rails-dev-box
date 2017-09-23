@@ -28,6 +28,11 @@ write_line .git/info/exclude '/docker-compose.yml'
 write_line .git/info/exclude '/docker-sync.yml'
 write_line .git/info/exclude '/Dockerfile'
 
+docker volume create rails-rails-sync
+container=$(docker container create -v rails-rails-sync:/app_sync busybox)
+docker cp . $container:/app_sync
+docker container rm $container
+
 docker-sync start
 
 docker-compose down
