@@ -2,8 +2,12 @@
 
 set -ex
 
+if -z "$BRANCH"; then
+  BRANCH=master
+fi
+
 download () {
-  curl -sL https://github.com/mtsmfm/docker-rails-dev-box/raw/master/$1 > $1
+  curl -sL https://github.com/mtsmfm/docker-rails-dev-box/raw/$BRANCH/$1 > $1
 }
 
 write_line () {
