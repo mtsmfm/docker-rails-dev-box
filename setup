@@ -22,6 +22,7 @@ mkdir -p .git/info
 download docker-compose.yml
 download docker-sync.yml
 download Dockerfile
+download activerecord/test/config.yml
 
 write_line .git/info/exclude '/docker-compose.yml'
 write_line .git/info/exclude '/docker-sync.yml'
