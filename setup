@@ -2,7 +2,7 @@
 
 set -ex
 
-if -z "$BRANCH"; then
+if [ -z "$BRANCH" ]; then
   BRANCH=master
 fi
 
