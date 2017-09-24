@@ -28,19 +28,22 @@ write_line .git/info/exclude '/docker-compose.yml'
 write_line .git/info/exclude '/docker-sync.yml'
 write_line .git/info/exclude '/Dockerfile'
 
+docker-compose down
+docker-sync clean || true
+
 docker volume create rails-rails-sync
 container=$(docker container create -v rails-rails-sync:/app_sync busybox)
 docker cp . $container:/app_sync
 docker container rm $container
+docker run --rm -v rails-rails-sync:/app_sync busybox chown -R 1000 /app_sync
 
 docker-sync start
 
-docker-compose down
 docker-compose build
 docker-compose up -d && sleep 15
-docker-compose exec ruby bundle install
-docker-compose exec postgres psql -c "create database activerecord_unittest;" -U postgres
-docker-compose exec postgres psql -c "create database activerecord_unittest2;" -U postgres
+docker-compose exec -T ruby bundle install
+docker-compose exec -T postgres psql -c "create database activerecord_unittest;" -U postgres
+docker-compose exec -T postgres psql -c "create database activerecord_unittest2;" -U postgres
 
 set +x
 

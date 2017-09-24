@@ -10,6 +10,9 @@ services:
       - home:/home/app
   postgres:
     image: postgres:9.4-alpine
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD:
 volumes:
   home:
   bundle:
