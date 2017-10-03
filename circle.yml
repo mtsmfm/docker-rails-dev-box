@@ -1,18 +1,15 @@
 version: 2
 jobs:
   test: &test
-    machine: true
+    machine:
+      image: circleci/classic:edge
     steps:
       - checkout
       - run:
           name: setup
           command: |
             set -x
-            gem install docker-sync
-            git clone https://github.com/rails/rails --depth 1
-            cd rails
-            export BRANCH=$CIRCLE_SHA1
-            curl -sL https://github.com/mtsmfm/docker-rails-dev-box/raw/$BRANCH/setup | bash
+            bin/setup
             docker-compose run -w /app/activerecord -e ARCONN=postgresql ruby sh -c 'ls test/**/*_test.rb | head -n 1 | xargs bundle exec ruby -I test'
 workflows:
   version: 2

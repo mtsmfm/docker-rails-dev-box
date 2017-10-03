@@ -1,7 +1,0 @@
-version: '2'
-options:
-  verbose: true
-syncs:
-  rails-rails-sync:
-    src: .
-    sync_userid: 1000

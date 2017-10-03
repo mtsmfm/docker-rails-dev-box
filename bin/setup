@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -e
+
+fail () {
+  echo -e $1
+
+  false
+}
+
+if ! [ -x "$(command -v docker)" ]; then
+  fail "docker executable not found. Please install docker https://docs.docker.com/engine/installation/"
+fi
+
+if ! [ -x "$(command -v docker-compose)" ]; then
+  fail "docker-compose executable not found. Please install docker-compose https://docs.docker.com/compose/install/"
+fi
+
+if ! [ -d rails ]; then
+  echo "---- Cloning rails/rails repo ----"
+  git clone https://github.com/rails/rails --depth 1
+  echo "---- Cloning done! ----"
+fi
+
+cp activerecord/test/config.yml rails/activerecord/test/config.yml
+
+echo "HOST_UID=$UID" > .env
+
+docker-compose build --pull
+
+echo "---- Setup finished! ----"
+echo 'Now you can run ruby container by `docker-compose run ruby bash`'
+echo 'Enjoy development rails core!'
+
+echo 'At this time, rails is cloned with `--depth 1`'
+echo 'If you need full history, please run `cd rails && git fetch --unshallow`'
