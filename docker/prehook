@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+system 'bundle check || bundle install'
+
+require 'bundler/setup'
+require 'active_record'
+
+begin
+  ActiveRecord::Base.establish_connection('host' => 'postgres', 'adapter' => 'postgresql')
+
+  %w(activerecord_unittest activerecord_unittest2).each do |db|
+    if ActiveRecord::Base.connection.execute('SELECT datname FROM pg_database').values.flatten.exclude?(db)
+      ActiveRecord::Base.connection.execute("create database #{db}")
+    end
+  end
+rescue PG::ConnectionBad
+  sleep 1
+  retry
+end

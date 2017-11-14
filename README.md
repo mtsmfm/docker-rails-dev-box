@@ -4,12 +4,11 @@
 
 - docker
 - docker-compose
-- docker-sync
 
 ## Usage
 
 ```
-git clone https://github.com/rails/rails
-cd rails
-curl -sL https://github.com/mtsmfm/docker-rails-dev-box/raw/master/setup | bash
+git clone https://github.com/mtsmfm/docker-rails-dev-box
+cd docker-rails-dev-box
+bin/setup
 ```
