@@ -3,8 +3,6 @@ services:
   ruby: &ruby
     build:
       context: .
-      args:
-        HOST_UID: $HOST_UID
     depends_on:
       - postgres
     volumes:
@@ -12,28 +10,24 @@ services:
       - ./docker:/docker:cached
       - vendor:/vendor
       - home:/home/app
-    env_file: .env
   ruby-2-3:
     <<: *ruby
     build:
       context: .
       args:
         RUBY_IMAGE: ruby:2.3.4
-        HOST_UID: $HOST_UID
   ruby-2-2:
     <<: *ruby
     build:
       context: .
       args:
         RUBY_IMAGE: ruby:2.2.7
-        HOST_UID: $HOST_UID
   ruby-trunk:
     <<: *ruby
     build:
       context: .
       args:
         RUBY_IMAGE: mtsmfm/ruby-trunk
-        HOST_UID: $HOST_UID
   postgres:
     image: postgres:9.4-alpine
     environment:

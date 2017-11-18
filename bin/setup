@@ -24,9 +24,7 @@ fi
 
 cp activerecord/test/config.yml rails/activerecord/test/config.yml
 
-echo "HOST_UID=$UID" > .env
-
-docker-compose build --pull
+docker-compose build --pull --build-arg HOST_UID=$UID ruby ruby-2-3 ruby-2-2 ruby-trunk
 
 echo "---- Setup finished! ----"
 echo 'Now you can run ruby container by `docker-compose run ruby bash`'
