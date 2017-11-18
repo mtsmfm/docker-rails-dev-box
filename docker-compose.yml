@@ -10,6 +10,8 @@ services:
       - ./docker:/docker:cached
       - vendor:/vendor
       - home:/home/app
+    environment:
+      PGHOST: postgres
   ruby-2-3:
     <<: *ruby
     build:

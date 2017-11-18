@@ -22,8 +22,6 @@ if ! [ -d rails ]; then
   echo "---- Cloning done! ----"
 fi
 
-cp activerecord/test/config.yml rails/activerecord/test/config.yml
-
 docker-compose build --pull --build-arg HOST_UID=$UID ruby ruby-2-3 ruby-2-2 ruby-trunk
 
 echo "---- Setup finished! ----"

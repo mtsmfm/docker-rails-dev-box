@@ -6,7 +6,7 @@ require 'bundler/setup'
 require 'active_record'
 
 begin
-  ActiveRecord::Base.establish_connection('host' => 'postgres', 'adapter' => 'postgresql')
+  ActiveRecord::Base.establish_connection('adapter' => 'postgresql')
 
   %w(activerecord_unittest activerecord_unittest2).each do |db|
     if ActiveRecord::Base.connection.execute('SELECT datname FROM pg_database').values.flatten.exclude?(db)
