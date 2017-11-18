@@ -3,6 +3,7 @@
 system 'bundle check || bundle install'
 
 spawn 'redir --lport=6379 --cport=6379 --caddr=redis'
+spawn 'redir --lport=11211 --cport=11211 --caddr=memcached'
 
 require 'bundler/setup'
 require 'active_record'

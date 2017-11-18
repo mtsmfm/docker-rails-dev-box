@@ -6,6 +6,7 @@ services:
     depends_on:
       - postgres
       - redis
+      - memcached
     volumes:
       - ./rails:/app:cached
       - ./docker:/docker:cached
@@ -38,6 +39,8 @@ services:
       POSTGRES_PASSWORD:
   redis:
     image: redis:alpine
+  memcached:
+    image: memcached:alpine
 volumes:
   home:
   vendor:
