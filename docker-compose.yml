@@ -5,6 +5,7 @@ services:
       context: .
     depends_on:
       - postgres
+      - redis
     volumes:
       - ./rails:/app:cached
       - ./docker:/docker:cached
@@ -35,6 +36,8 @@ services:
     environment:
       POSTGRES_USER: app
       POSTGRES_PASSWORD:
+  redis:
+    image: redis:alpine
 volumes:
   home:
   vendor:

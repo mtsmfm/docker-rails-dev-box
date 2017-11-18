@@ -7,7 +7,7 @@ ARG HOST_UID
 RUN test -n "${HOST_UID}" || (echo 'Please build with HOST_UID build arg! eg. `docker-compose build --build-arg HOST_UID=$UID ruby`' && false)
 
 RUN apt-get update -q && \
-  apt-get install -y --no-install-recommends less sqlite3 libsqlite3-dev nodejs
+  apt-get install -y --no-install-recommends less sqlite3 libsqlite3-dev nodejs redir
 
 RUN useradd --create-home --user-group --uid $HOST_UID app && \
   mkdir /app /vendor && \

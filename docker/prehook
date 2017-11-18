@@ -2,6 +2,8 @@
 
 system 'bundle check || bundle install'
 
+spawn 'redir --lport=6379 --cport=6379 --caddr=redis'
+
 require 'bundler/setup'
 require 'active_record'
 
