@@ -12,7 +12,7 @@ services:
     volumes:
       - ./rails:/app:cached
       - ./docker:/docker:cached
-      - vendor:/vendor
+      - vendor-ruby:/vendor
       - home:/home/app
     environment:
       PGHOST: postgres
@@ -22,18 +22,33 @@ services:
       context: .
       args:
         RUBY_IMAGE: ruby:2.5.1
+    volumes:
+      - ./rails:/app:cached
+      - ./docker:/docker:cached
+      - vendor-ruby-2-5:/vendor
+      - home:/home/app
   ruby-2-4:
     <<: *ruby
     build:
       context: .
       args:
         RUBY_IMAGE: ruby:2.4.4
+    volumes:
+      - ./rails:/app:cached
+      - ./docker:/docker:cached
+      - vendor-ruby-2-4:/vendor
+      - home:/home/app
   ruby-trunk:
     <<: *ruby
     build:
       context: .
       args:
         RUBY_IMAGE: mtsmfm/ruby-trunk
+    volumes:
+      - ./rails:/app:cached
+      - ./docker:/docker:cached
+      - vendor-ruby-trunk:/vendor
+      - home:/home/app
   postgres:
     image: postgres:9.4-alpine
     environment:
@@ -45,4 +60,7 @@ services:
     image: memcached:alpine
 volumes:
   ? home
-  ? vendor
+  ? vendor-ruby
+  ? vendor-ruby-2-5
+  ? vendor-ruby-2-4
+  ? vendor-ruby-trunk

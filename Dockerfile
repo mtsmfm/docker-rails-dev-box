@@ -17,7 +17,7 @@ RUN useradd --create-home --user-group --uid $HOST_UID app && \
 ENV LANG=C.UTF-8 \
   LC_ALL=C.UTF-8 \
   BUNDLE_JOBS=4 \
-  BUNDLE_PATH=/vendor/bundle/$RUBY_IMAGE
+  BUNDLE_PATH=/vendor/bundle
 
 ENV ENTRYKIT_VERSION 0.4.0
 
