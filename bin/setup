@@ -22,7 +22,7 @@ if ! [ -d rails ]; then
   echo "---- Cloning done! ----"
 fi
 
-docker-compose build --pull --build-arg HOST_UID=$UID ruby ruby-2-3 ruby-2-2 ruby-trunk
+docker-compose build --pull --build-arg HOST_UID=$UID ruby ruby-2-5 ruby-2-4 ruby-trunk
 
 echo "---- Setup finished! ----"
 echo 'Now you can run ruby container by `docker-compose run ruby bash`'

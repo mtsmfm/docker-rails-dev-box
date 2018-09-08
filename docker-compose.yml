@@ -1,8 +1,10 @@
-version: '2'
+version: "2"
 services:
   ruby: &ruby
     build:
       context: .
+      args:
+        RUBY_IMAGE: ruby:2.5.1
     depends_on:
       - postgres
       - redis
@@ -14,18 +16,18 @@ services:
       - home:/home/app
     environment:
       PGHOST: postgres
-  ruby-2-3:
+  ruby-2-5:
     <<: *ruby
     build:
       context: .
       args:
-        RUBY_IMAGE: ruby:2.3.4
-  ruby-2-2:
+        RUBY_IMAGE: ruby:2.5.1
+  ruby-2-4:
     <<: *ruby
     build:
       context: .
       args:
-        RUBY_IMAGE: ruby:2.2.7
+        RUBY_IMAGE: ruby:2.4.4
   ruby-trunk:
     <<: *ruby
     build:
@@ -36,11 +38,11 @@ services:
     image: postgres:9.4-alpine
     environment:
       POSTGRES_USER: app
-      POSTGRES_PASSWORD:
+      ? POSTGRES_PASSWORD
   redis:
     image: redis:alpine
   memcached:
     image: memcached:alpine
 volumes:
-  home:
-  vendor:
+  ? home
+  ? vendor
