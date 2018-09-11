@@ -8,7 +8,7 @@ ARG RUBY_IMAGE
 RUN test -n "${HOST_UID}" || (echo 'Please build with HOST_UID build arg! eg. `docker-compose build --build-arg HOST_UID=$UID ruby`' && false)
 
 RUN apt-get update -q && \
-  apt-get install -y less sqlite3 libsqlite3-dev nodejs redir build-essential patch ruby-dev zlib1g-dev liblzma-dev
+  apt-get install -y less sqlite3 libsqlite3-dev nodejs redir build-essential patch ruby-dev zlib1g-dev liblzma-dev poppler-utils mupdf-tools ffmpeg
 
 RUN useradd --create-home --user-group --uid $HOST_UID app && \
   mkdir /app /vendor && \
